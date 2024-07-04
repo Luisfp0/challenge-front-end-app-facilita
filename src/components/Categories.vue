@@ -27,11 +27,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 10%;
-  height: 100vh;
+  height: 100%;
   background-color: #f0f0f0;
-  padding: 20px;
   border-left: 1px solid #ccc;
+  width: 15%;
 }
 
 .category-option {
