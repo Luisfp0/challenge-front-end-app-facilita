@@ -18,7 +18,7 @@ export default defineComponent({
   components: {
     Sidebar,
     Header,
-    Categories,
+    Categories
   },
 });
 </script>
