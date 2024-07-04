@@ -1,6 +1,9 @@
 <template>
+  <div v-if="showRegisterForm">
+    <RegisterTaskVue @close="showRegisterForm = false" />
+  </div>
   <div class="todo_list_container">
-    <button class="add_todo">
+    <button class="add_todo" @click="showRegisterForm = true">
       <fa class="icon_plus" :icon="['fas', 'plus']" />
     </button>
     <div class="container_todo_list">
@@ -25,8 +28,16 @@
   </div>
 </template>
 
-<script lang="ts">
-// Script TypeScript aqui
+<script setup lang="ts">
+import RegisterTaskVue from "../components/RegisterTask.vue";
+import { ref } from "vue";
+
+const showRegisterForm = ref(false);
+
+export default {
+  name: "TodoList",
+  components: RegisterTaskVue
+}
 </script>
 
 <style scoped>
