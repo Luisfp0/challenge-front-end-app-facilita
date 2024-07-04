@@ -28,9 +28,9 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #f0f0f0;
+  background-color: #F4FBFF;
   border-left: 1px solid #ccc;
-  width: 15%;
+  width: 20%;
 }
 
 .category-option {

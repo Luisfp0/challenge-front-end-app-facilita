@@ -43,14 +43,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { ref, getCurrentInstance, watch } from "vue";
+<script setup lang="ts">
+import { ref, getCurrentInstance, onMounted } from "vue";
 
 const input_title = ref("");
 const input_description = ref("");
 const todos = ref([]);
-
 let input_category = ref<string | null>(null);
+const instance = getCurrentInstance();
+
+onMounted(() => {
+  const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+  todos.value = storedTodos;
+});
 
 const addTodo = () => {
   if (
@@ -62,7 +67,10 @@ const addTodo = () => {
   }
 
   todos.value.push({
-    content: { title: input_title.value, description: input_description.value },
+    content: {
+      title: input_title.value,
+      description: input_description.value,
+    },
     category: input_category.value,
     done: false,
     createdAt: new Date().getTime(),
@@ -71,7 +79,11 @@ const addTodo = () => {
   input_title.value = "";
   input_description.value = "";
   input_category.value = null;
+
   saveTodos();
+  if (instance) {
+    instance.emit("newTodo");
+  }
   closeForm();
 };
 
@@ -79,7 +91,6 @@ const saveTodos = () => {
   localStorage.setItem("todos", JSON.stringify(todos.value));
 };
 
-const instance = getCurrentInstance();
 const closeForm = () => {
   if (instance) {
     instance.emit("close");
@@ -106,7 +117,7 @@ const closeForm = () => {
   position: relative;
   width: 450px;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 10px;

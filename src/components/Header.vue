@@ -22,7 +22,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 60px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0 20px;
 }
