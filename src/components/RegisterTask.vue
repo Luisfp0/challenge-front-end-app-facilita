@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { ref, getCurrentInstance, watch } from "vue";
 
 const input_title = ref("");
@@ -84,10 +84,6 @@ const closeForm = () => {
   if (instance) {
     instance.emit("close");
   }
-};
-
-export default {
-  name: "RegisterTask",
 };
 </script>
 

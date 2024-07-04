@@ -28,16 +28,23 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import RegisterTaskVue from "../components/RegisterTask.vue";
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 const showRegisterForm = ref(false);
 
-export default {
-  name: "TodoList",
-  components: RegisterTaskVue
-}
+const todos = ref([]);
+
+const todos_asc = computed(() =>
+  todos.value.sort((a, b) => {
+    return b.createdAt - a.createdAt;
+  })
+);
+
+onMounted(() => {
+  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+});
 </script>
 
 <style scoped>

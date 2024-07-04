@@ -11,20 +11,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { defineComponent } from "vue";
+<script setup>
 import Sidebar from "../components/SideBar.vue";
 import Header from "../components/Header.vue";
 import Categories from "../components/Categories.vue";
 import TodoList from "../components/TodoList.vue";
-
-export default {
-  name: "DashBoard",
-  components: Sidebar,
-  Header,
-  Categories,
-  TodoList,
-};
+import RegisterTask from '../components/RegisterTask.vue'
 </script>
 
 <style scoped>

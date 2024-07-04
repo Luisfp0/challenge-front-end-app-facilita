@@ -14,34 +14,27 @@
         :class="{ selected: selectedOption === 'tarefas' }"
         @click="selectOption('tarefas')"
       >
-        <fa class="icon" :icon="['fas', 'circle-check']" />Tarefas
+        <fa class="icon" :icon="['fas', 'circle-check']" /> Tarefas
       </div>
       <div
         class="option"
         :class="{ selected: selectedOption === 'configuracoes' }"
         @click="selectOption('configuracoes')"
       >
-        <fa class="icon" :icon="['fas', 'gears']" />Configurações
+        <fa class="icon" :icon="['fas', 'gears']" /> Configurações
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  data() {
-    return {
-      selectedOption: "dashboard",
-    };
-  },
-  methods: {
-    selectOption(option: string) {
-      this.selectedOption = option;
-    },
-  },
-});
+const selectedOption = ref("dashboard");
+
+const selectOption = (option: string) => {
+  selectedOption.value = option;
+};
 </script>
 
 <style scoped>

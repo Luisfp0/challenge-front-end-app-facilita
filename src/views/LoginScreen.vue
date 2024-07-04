@@ -13,11 +13,11 @@
         <form @submit.prevent="handleLogin">
           <div class="input_login">
             <span>Nome de usuário ou e-mail:</span>
-            <input type="text" />
+            <input type="text" v-model="username" />
           </div>
           <div class="input_login">
             <span>Senha:</span>
-            <input type="text" />
+            <input type="password" v-model="password" />
           </div>
           <button class="button_login" type="submit">Entrar</button>
         </form>
@@ -27,24 +27,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-export default defineComponent({
-  methods: {
-    handleLogin() {
-      this.$router.push("/dashboard");
-    },
-  },
-});
+const username = ref("");
+const password = ref("");
+
+const router = useRouter();
+
+const handleLogin = () => {
+  if (username.value === "admin" && password.value === "password") {
+    router.push("/dashboard");
+  } else {
+    alert("Credenciais inválidas. Por favor, tente novamente.");
+  }
+};
 </script>
 
 <style scoped>
 .container_login_screen {
   display: flex;
   align-items: center;
-  background-color: ffffff;
-  width: screen;
+  background-color: #ffffff;
+  width: 100vw;
   height: 100vh;
 }
 
