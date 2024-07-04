@@ -1,17 +1,19 @@
 <template>
   <div class="dashboard">
     <Sidebar />
-    <h1>Dashboard</h1>
+    <Header/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Sidebar from '../components/SideBar.vue'
+import Header from '../components/Header.vue'
 
 export default defineComponent({
   components: {
-    Sidebar
+    Sidebar,
+    Header
   },
 })
 </script>
@@ -19,7 +21,7 @@ export default defineComponent({
 <style scoped>
 .dashboard {
   display: flex;
-  width: auto;
+  width: 100%;
   height: 100vh;
 }
 </style>

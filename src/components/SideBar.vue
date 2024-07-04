@@ -39,7 +39,6 @@ export default defineComponent({
   methods: {
     selectOption(option: string) {
       this.selectedOption = option;
-      // Aqui você pode adicionar a lógica para redirecionar ou executar ações relacionadas à opção selecionada
     },
   },
 });
@@ -50,7 +49,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 110px;
   background-color: #2693ff;
   border-right: 1px solid #ccc;
   padding: 10px 0 10px 0;
