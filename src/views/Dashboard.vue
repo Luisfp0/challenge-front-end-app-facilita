@@ -1,18 +1,25 @@
 <template>
-  <div>
+  <div class="dashboard">
+    <Sidebar />
     <h1>Dashboard</h1>
-    <!-- Conteúdo do dashboard aqui -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Sidebar from '../components/SideBar.vue'
 
 export default defineComponent({
-  // Lógica do componente do dashboard, se necessário
+  components: {
+    Sidebar
+  },
 })
 </script>
 
 <style scoped>
-/* Estilos específicos do componente do dashboard */
+.dashboard {
+  display: flex;
+  width: auto;
+  height: 100vh;
+}
 </style>
