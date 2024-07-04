@@ -52,6 +52,7 @@ export default defineComponent({
   background-color: #2693ff;
   border-right: 1px solid #ccc;
   padding: 10px 0 10px 0;
+  width: 8%;
 }
 
 .logo {
@@ -65,7 +66,7 @@ export default defineComponent({
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  width: 110px;
+  width: 100%;
 }
 
 .option {

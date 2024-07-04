@@ -1,27 +1,37 @@
 <template>
   <div class="dashboard">
     <Sidebar />
-    <Header/>
+    <div class="main_content">
+      <Header />
+      <Categories />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import Sidebar from '../components/SideBar.vue'
-import Header from '../components/Header.vue'
+import { defineComponent } from "vue";
+import Sidebar from "../components/SideBar.vue";
+import Header from "../components/Header.vue";
+import Categories from "../components/Categories.vue";
 
 export default defineComponent({
   components: {
     Sidebar,
-    Header
+    Header,
+    Categories,
   },
-})
+});
 </script>
 
 <style scoped>
 .dashboard {
   display: flex;
-  width: 100%;
   height: 100vh;
+}
+
+.main_content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 </style>

@@ -24,12 +24,10 @@ export default defineComponent({
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
   height: 60px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0 20px;
-  z-index: 1000;
 }
 
 .header-content {
