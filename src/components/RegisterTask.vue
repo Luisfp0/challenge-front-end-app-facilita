@@ -129,6 +129,7 @@ const closeForm = () => {
   display: flex
   justify-content: center
   align-items: center
+  z-index: 10
 
 .task_container
   position: relative

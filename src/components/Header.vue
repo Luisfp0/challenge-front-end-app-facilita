@@ -4,7 +4,7 @@
       <div class="user-info">
         <img class="user-photo" src="../assets/images/user-photo.png" alt="User Photo" />
         <div class="user-details">
-          <div class="user-name">Luís Fernando de Paulo</div>
+          <div class="user-name">Eduardo Pereira da Costa</div>
           <div class="user-role">Front-end Developer</div>
         </div>
       </div>

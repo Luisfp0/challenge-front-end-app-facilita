@@ -14,7 +14,11 @@
     <RemoveTask @close="showRemoveTask = false" @delete="deleteTask" />
   </div>
   <div v-if="showEditTask">
-    <EditTask :todoIdToEdit="taskIdToEdit" @close="showEditTask = false" @editForm="reloadTodos" />
+    <EditTask
+      :todoIdToEdit="taskIdToEdit"
+      @close="showEditTask = false"
+      @editForm="reloadTodos"
+    />
   </div>
   <div class="todo_list_container">
     <button class="add_todo" @click="showRegisterForm = true">
@@ -79,7 +83,9 @@
                 </div>
                 <div>
                   <div class="remove_circle"></div>
-                  <button @click="handleOpenDeleteModal(todo.id)">Excluir</button>
+                  <button @click="handleOpenDeleteModal(todo.id)">
+                    Excluir
+                  </button>
                 </div>
               </div>
             </div>
@@ -292,11 +298,10 @@ onMounted(() => {
   display: flex
   justify-content: space-between
   margin-bottom: 20px
-  padding: 10px
+  padding: 25px
   border: 1px solid #ccc
   border-radius: 5px
   background-color: #ffffff
-  height: 55px
   transition: opacity 0.3s ease
 
 .todo_item.done
@@ -310,9 +315,10 @@ onMounted(() => {
 
 h3
   font-size: 18px
-  margin-bottom: 0
   font-family: 'Gilroy-SemiBold'
-
+  font-family: 'Gilroy-SemiBold'
+  white-space: normal;
+  word-break: break-word;
 
 .outlined
   text-decoration: line-through
