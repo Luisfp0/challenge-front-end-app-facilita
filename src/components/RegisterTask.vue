@@ -60,8 +60,7 @@ onMounted(() => {
 const addTodo = () => {
   if (
     input_title.value.trim() === "" ||
-    input_description.value.trim() === "" ||
-    input_category.value === null
+    input_description.value.trim() === ""
   ) {
     return;
   }
@@ -126,6 +125,7 @@ const closeForm = () => {
 .task_container h3
   font-size: 23px
   margin-bottom: 30px
+  font-family: 'Gilroy-Bold'
 
 .icon_close
   position: absolute

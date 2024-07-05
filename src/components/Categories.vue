@@ -1,13 +1,21 @@
 <template>
   <div class="categories">
-    <h2>Categorias</h2>
     <div class="options">
-      <div class="category_option" @click="allFilter">
+      <h2>Categorias</h2>
+      <div
+        class="category_option"
+        :class="{ selected: selectedCategory === 'all' }"
+        @click="allFilter"
+      >
         <div class="underline">
           <fa class="icon" :icon="['fas', 'chevron-right']" />Todas
         </div>
       </div>
-      <div class="category_option" @click="urgentFilter">
+      <div
+        class="category_option"
+        :class="{ selected: selectedCategory === 'urgent' }"
+        @click="urgentFilter"
+      >
         <div class="underline">
           <fa class="icon" :icon="['fas', 'chevron-right']" />Urgentes
         </div>
@@ -15,7 +23,11 @@
           <span>{{ urgentCount }}</span>
         </div>
       </div>
-      <div class="category_option" @click="importantFilter">
+      <div
+        class="category_option"
+        :class="{ selected: selectedCategory === 'important' }"
+        @click="importantFilter"
+      >
         <div class="underline">
           <fa class="icon" :icon="['fas', 'chevron-right']" />Importantes
         </div>
@@ -23,12 +35,20 @@
           <span>{{ importantCount }}</span>
         </div>
       </div>
-      <div class="category_option" @click="othersFilter">
+      <div
+        class="category_option"
+        :class="{ selected: selectedCategory === 'others' }"
+        @click="othersFilter"
+      >
         <div class="underline">
           <fa class="icon" :icon="['fas', 'chevron-right']" />Outras
         </div>
       </div>
-      <div class="category_option" @click="finishedFilter">
+      <div
+        class="category_option"
+        :class="{ selected: selectedCategory === 'finished' }"
+        @click="finishedFilter"
+      >
         <div class="underline">
           <fa class="icon" :icon="['fas', 'chevron-right']" />Finalizadas
         </div>
@@ -43,40 +63,42 @@ import { onMounted, ref, computed, getCurrentInstance } from "vue";
 const instance = getCurrentInstance();
 
 const todos = ref([]);
+const selectedCategory = ref("all");
 
 const allFilter = () => {
+  selectedCategory.value = "all";
   if (instance) {
     instance.emit("all");
   }
 };
 
 const importantFilter = () => {
+  selectedCategory.value = "important";
   if (instance) {
     instance.emit("important");
   }
 };
 
 const urgentFilter = () => {
+  selectedCategory.value = "urgent";
   if (instance) {
     instance.emit("urgent");
   }
 };
 
 const othersFilter = () => {
+  selectedCategory.value = "others";
   if (instance) {
     instance.emit("others");
   }
 };
 
 const finishedFilter = () => {
+  selectedCategory.value = "finished";
   if (instance) {
     instance.emit("finished");
   }
 };
-
-onMounted(() => {
-  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
-});
 
 const urgentCount = computed(() => {
   return todos.value.filter((todo) => todo.category === "urgent").length;
@@ -84,6 +106,10 @@ const urgentCount = computed(() => {
 
 const importantCount = computed(() => {
   return todos.value.filter((todo) => todo.category === "important").length;
+});
+
+onMounted(() => {
+  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
 });
 </script>
 
@@ -99,12 +125,14 @@ const importantCount = computed(() => {
   width: 20%
 
   h2
-    margin-bottom: 20px
+    margin-bottom: 30px
+    font-size: 17px
+    font-family: 'Gilroy-Bold'
 
 .options
   display: flex
   flex-direction: column
-  gap: 10px
+  gap: 20px
 
 .category_option
   display: flex
@@ -112,6 +140,9 @@ const importantCount = computed(() => {
   cursor: pointer
   color: #000
   transition: color 0.3s ease
+
+  &.selected
+    color: #007bff
 
   &:hover
     color: #007bff
@@ -140,5 +171,5 @@ const importantCount = computed(() => {
   margin-right: 5px
 
 span
-  font-size: 14px
+  font-size: 15px
 </style>

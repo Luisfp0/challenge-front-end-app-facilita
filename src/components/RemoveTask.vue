@@ -9,7 +9,9 @@
       <div class="actions">
         <div class="buttons_container">
           <button class="cancel_button" @click="cancelDelete">Cancelar</button>
-          <button class="delete_button" @click="confirmDelete">Confirmar</button>
+          <button class="delete_button" @click="confirmDelete">
+            Confirmar
+          </button>
         </div>
       </div>
     </div>
@@ -60,6 +62,15 @@ const confirmDelete = () => {
   align-items: center
   justify-content: center
 
+.task_container span
+  color: red
+
+.task_container h2
+  margin-bottom: 25px
+
+.task_container h1
+  font-family: 'Gilroy-Bold'
+
 .background_icon_trash
   background-color: #edf6fc
   width: 120px
@@ -82,9 +93,6 @@ const confirmDelete = () => {
   align-items: center
   gap: 10px
 
-.task_container span
-  color: red
-
 .buttons_container
   display: flex
   gap: 10px
@@ -97,6 +105,7 @@ const confirmDelete = () => {
   color: #ffffff
   border: none
   border-radius: 5px
+  cursor: pointer
 
 .delete_button
   width: 100px
@@ -106,7 +115,5 @@ const confirmDelete = () => {
   color: #ffffff
   border: none
   border-radius: 5px
-
-.task_container h2
-  margin-bottom: 25px
+  cursor: pointer
 </style>

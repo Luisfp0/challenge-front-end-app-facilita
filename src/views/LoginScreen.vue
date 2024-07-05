@@ -52,6 +52,7 @@ const handleLogin = () => {
   background-color: #ffffff
   width: 100vw
   height: 100vh
+  font-family: 'Gilroy-Regular'
 
 .logo_container
   display: flex
@@ -69,6 +70,7 @@ const handleLogin = () => {
 
   span
     opacity: 90%
+    font-family: 'Gilroy-Light'
 
 .logo
   width: 100px
@@ -109,6 +111,7 @@ const handleLogin = () => {
   margin-bottom: 30px
   font-size: 16px
   font-weight: 600
+  font-family: 'Gilroy-Bold'
 
 .button_login
   color: white

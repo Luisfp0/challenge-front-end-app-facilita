@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import "./reset.css";
+import "./style.css";
 import App from "./App.vue";
 import router from "./routes";
 import { library } from "@fortawesome/fontawesome-svg-core";

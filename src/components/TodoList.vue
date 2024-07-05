@@ -142,30 +142,21 @@ const deleteTask = (taskId) => {
   updateFilteredTodos();
 };
 
-const filterByCategory = (category) => {
-  if (category === "all") {
-    filteredTodos.value = todos_asc.value;
-  } else if (category === "finished") {
-    filteredTodos.value = todos_asc.value.filter((todo) => todo.done);
-  } else {
-    filteredTodos.value = todos_asc.value.filter(
-      (todo) => todo.category === category
-    );
-  }
-};
-
 const setCategory = (category) => {
   selectedCategory.value = category;
   updateFilteredTodos();
 };
 
 const updateFilteredTodos = () => {
+  console.log(selectedCategory.value);
   let todosToFilter = todos_asc.value;
 
   if (selectedCategory.value !== "all") {
     todosToFilter = todosToFilter.filter((todo) => {
       if (selectedCategory.value === "finished") {
         return todo.done;
+      } else if (selectedCategory.value === "others") {
+        return todo.category === null;
       }
       return todo.category === selectedCategory.value;
     });
@@ -219,13 +210,16 @@ onMounted(() => {
 .title
   font-size: 25px
   margin-bottom: 5px
+  font-family: 'Gilroy-Bold'
 
 .name
   color: #5caeff
+  font-family: 'Gilroy-Bold'
 
 .tasks_pending_span
   color: #5caeff
   text-decoration: underline
+  font-family: 'Gilroy-Bold'
 
 .input_container
   position: relative
@@ -275,9 +269,12 @@ onMounted(() => {
 h3
   font-size: 18px
   margin-bottom: 0
+  font-family: 'Gilroy-SemiBold'
+
 
 .outlined
   text-decoration: line-through
+  font-family: 'Gilroy-SemiBold'
 
 .tag
   color: white
