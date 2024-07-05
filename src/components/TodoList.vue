@@ -205,8 +205,8 @@ onMounted(() => {
 
 .add_todo
   position: absolute
-  right: 30px
-  bottom: 30px
+  right: 35px
+  bottom: 60px
   background-color: #1ad18f
   border: none
   border-radius: 50%
@@ -219,7 +219,7 @@ onMounted(() => {
 
 .container_todo_list
   width: 70%
-  margin-top: 250px
+  margin-top: 100px
 
 .title
   font-size: 25px
@@ -349,4 +349,16 @@ h3
 .container_select
   gap: 10px
   margin-right: 15px
+
+.todos
+  height: 650px
+  overflow-y: auto
+
+  &::-webkit-scrollbar
+    width: 4px
+    background-color: #E9F4FB
+
+  &::-webkit-scrollbar-thumb
+    background-color: #888
+    border-radius: 4px
 </style>

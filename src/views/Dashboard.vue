@@ -24,6 +24,7 @@ import RegisterTask from "../components/RegisterTask.vue";
   height: 100vh
   position: relative
   font-family: 'Gilroy-Regular'
+  overflow: hidden
 
 .main_content
   display: flex

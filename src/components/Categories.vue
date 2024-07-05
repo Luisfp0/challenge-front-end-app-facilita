@@ -112,7 +112,6 @@ const importantCount = computed(() => {
 });
 </script>
 
-
 <style lang="stylus" scoped>
 .categories
   display: flex
@@ -122,7 +121,7 @@ const importantCount = computed(() => {
   height: 100%
   background-color: #f4fbff
   border-left: 1px solid #ccc
-  width: 20%
+  width: 230px
 
   h2
     margin-bottom: 30px

@@ -45,7 +45,7 @@ const selectOption = (option: string) => {
   background-color: #2693ff
   border-right: 1px solid #ccc
   padding: 10px 0
-  width: 9%
+  width: 150px
   font-family: 'Gilroy-Bold'
 
 .logo
