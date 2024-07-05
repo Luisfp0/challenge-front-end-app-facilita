@@ -10,9 +10,9 @@ O desafio proposto pode ser visualizado no seguinte link:
 O projeto está hospedado na vercel, caso tenha interesse em visualizar, é só acessar esse link.
 <a>https://challenge-front-end-app-facilita.vercel.app/</a>
 
-## Screens
+## 🖥️ Telas
 
-### 1. Login Screen
+### 1. Tela de Login
 
 - Permite o acesso usando o nome de usuário: `admin` e a senha: `password`.
 
