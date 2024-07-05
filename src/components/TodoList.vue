@@ -23,6 +23,7 @@
         <div class="input_container">
           <input
             class="search_input"
+            v-model="searchQuery"
             placeholder="Buscar Tarefas"
             type="text"
           />
@@ -31,7 +32,7 @@
       </section>
       <section class="todos">
         <div
-          v-for="(todo, index) in todos_asc"
+          v-for="(todo, index) in filteredTodos"
           :key="index"
           class="todo_item"
           :class="{ done: todo.done }"
@@ -87,6 +88,7 @@ const showRegisterForm = ref(false);
 const showRemoveTask = ref(false);
 const showOptions = ref({});
 const taskIdToRemove = ref(null);
+const searchQuery = ref("");
 
 const todos = ref([]);
 
@@ -127,6 +129,17 @@ const deleteTask = (taskId) => {
   );
   showRemoveTask.value = false;
 };
+
+const filteredTodos = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return todos_asc.value;
+  } else {
+    const search = searchQuery.value.trim().toLowerCase();
+    return todos_asc.value.filter((todo) =>
+      todo.content.title.toLowerCase().includes(search)
+    );
+  }
+});
 
 onMounted(() => {
   todos.value = JSON.parse(localStorage.getItem("todos")) || [];
