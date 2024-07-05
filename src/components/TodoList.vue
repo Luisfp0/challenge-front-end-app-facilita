@@ -21,7 +21,7 @@
     />
   </div>
   <div class="todo_list_container">
-    <button class="add_todo" @click="showRegisterForm = true">
+    <button class="add_todo" @click="openRegisterForm">
       <fa class="icon_plus" :icon="['fas', 'plus']" />
     </button>
     <div class="container_todo_list">
@@ -40,6 +40,7 @@
             class="search_input"
             v-model="searchQuery"
             placeholder="Buscar Tarefas"
+            value={searchQuery}
             type="text"
           />
           <fa class="icon_search" :icon="['fas', 'magnifying-glass']" />
@@ -153,18 +154,26 @@ const handleOpenDeleteModal = (index) => {
   showOptions.value = {}; // Limpa o estado das opções de exibição
   taskIdToRemove.value = index; // Define o ID da tarefa a ser removida
   showRemoveTask.value = true; // Exibe o modal de remoção de tarefa
+  searchQuery.value = ""; // Limpa a busca
 };
 
 const handleOpenEditModal = (index) => {
   showOptions.value = {}; // Limpa o estado das opções de exibição
   taskIdToEdit.value = index; // Define o ID da tarefa a ser editada
   showEditTask.value = true; // Exibe o modal de edição de tarefa
+  searchQuery.value = ""; // Limpa a busca
 };
 
 // Recarrega a lista de tarefas do localStorage e atualiza as tarefas filtradas
 const reloadTodos = () => {
   todos.value = JSON.parse(localStorage.getItem("todos")) || []; // Carrega as tarefas do localStorage
   updateFilteredTodos(); // Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
+  searchQuery.value = ""; // Limpa a busca
+};
+
+const openRegisterForm = () => {
+  showRegisterForm.value = true;
+  searchQuery.value = ""; // Limpa a busca
 };
 
 // Alternar a exibição das opções de cada tarefa
@@ -180,6 +189,7 @@ const deleteTask = () => {
   todos.value = todos.value.filter((todo) => todo.id !== taskIdToRemove.value);
   showRemoveTask.value = false;
   updateFilteredTodos();
+  searchQuery.value = ""; // Limpa a busca
 };
 
 // Define a categoria selecionada e atualiza as tarefas filtradas
