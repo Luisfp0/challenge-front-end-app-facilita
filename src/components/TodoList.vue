@@ -111,7 +111,20 @@ watch(
 );
 
 const todos_asc = computed(() =>
-  todos.value.sort((a, b) => {
+  todos.value.slice().sort((a, b) => {
+    const priorityOrder = {
+      urgent: 1,
+      important: 2,
+      others: 3,
+    };
+
+    const priorityA = priorityOrder[a.category] || 4;
+    const priorityB = priorityOrder[b.category] || 4;
+
+    if (priorityA !== priorityB) {
+      return priorityA - priorityB;
+    }
+
     return b.createdAt - a.createdAt;
   })
 );
