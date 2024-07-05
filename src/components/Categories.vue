@@ -104,11 +104,15 @@ const finishedFilter = () => {
 };
 
 const urgentCount = computed(() => {
-  return props.todos.filter((todo) => todo.category === "urgent").length;
+  return props.todos.filter(
+    (todo) => todo.category === "urgent" && todo.done === false
+  ).length;
 });
 
 const importantCount = computed(() => {
-  return props.todos.filter((todo) => todo.category === "important").length;
+  return props.todos.filter(
+    (todo) => todo.category === "important" && todo.done === false
+  ).length;
 });
 </script>
 

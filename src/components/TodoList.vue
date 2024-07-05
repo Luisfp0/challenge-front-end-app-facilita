@@ -23,8 +23,8 @@
         <h2>
           Olá <span class="name">Luís Fernando</span>, você tem
           <span class="tasks_pending_span"
-            >{{ todos.length }}
-            {{ todos.length > 1 ? "tarefas" : "tarefa" }}</span
+            >{{ pendingTasksCount }}
+            {{ pendingTasksCount !== 1 ? "tarefas" : "tarefa" }}</span
           >
           pendentes.
         </h2>
@@ -99,6 +99,9 @@ const showOptions = ref({});
 const taskIdToRemove = ref(null);
 const searchQuery = ref("");
 const selectedCategory = ref("all");
+const pendingTasksCount = computed(
+  () => todos.value.filter((todo) => !todo.done).length
+);
 
 const todos = ref([]);
 const filteredTodos = ref([]);
