@@ -1,5 +1,6 @@
 <template>
   <Categories
+    :todos="todos"
     @all="() => setCategory('all')"
     @urgent="() => setCategory('urgent')"
     @important="() => setCategory('important')"

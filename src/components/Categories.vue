@@ -58,11 +58,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed, getCurrentInstance } from "vue";
+import { defineProps, onMounted, ref, computed, getCurrentInstance } from "vue";
+
+const props = defineProps({
+  todos: Array,
+});
 
 const instance = getCurrentInstance();
 
-const todos = ref([]);
 const selectedCategory = ref("all");
 
 const allFilter = () => {
@@ -101,17 +104,14 @@ const finishedFilter = () => {
 };
 
 const urgentCount = computed(() => {
-  return todos.value.filter((todo) => todo.category === "urgent").length;
+  return props.todos.filter((todo) => todo.category === "urgent").length;
 });
 
 const importantCount = computed(() => {
-  return todos.value.filter((todo) => todo.category === "important").length;
-});
-
-onMounted(() => {
-  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+  return props.todos.filter((todo) => todo.category === "important").length;
 });
 </script>
+
 
 <style lang="stylus" scoped>
 .categories
@@ -171,5 +171,5 @@ onMounted(() => {
   margin-right: 5px
 
 span
-  font-size: 15px
+  font-size: 14px
 </style>
