@@ -88,24 +88,26 @@
 </template>
 
 <script setup>
-import RegisterTaskVue from "../components/RegisterTask.vue";
-import Categories from "../components/Categories.vue";
-import RemoveTask from "../components/RemoveTask.vue";
-import { computed, onMounted, ref, watch } from "vue";
+import RegisterTaskVue from "../components/RegisterTask.vue"; // Importa o componente de registro de tarefa
+import Categories from "../components/Categories.vue"; // Importa o componente de categorias
+import RemoveTask from "../components/RemoveTask.vue"; // Importa o componente de remoção de tarefa
+import { computed, onMounted, ref, watch } from "vue"; // Importa funções e hooks necessários do Vue
 
-const showRegisterForm = ref(false);
-const showRemoveTask = ref(false);
-const showOptions = ref({});
-const taskIdToRemove = ref(null);
-const searchQuery = ref("");
-const selectedCategory = ref("all");
+// Referências reativas e variáveis computadas
+const showRegisterForm = ref(false); // Controla a exibição do formulário de registro de tarefa
+const showRemoveTask = ref(false); // Controla a exibição do modal de remoção de tarefa
+const showOptions = ref({}); // Armazena o estado de exibição das opções de cada tarefa
+const taskIdToRemove = ref(null); // Armazena o ID da tarefa a ser removida
+const searchQuery = ref(""); // Consulta de pesquisa para filtragem de tarefas por título e descrição
+const selectedCategory = ref("all"); // Categoria selecionada para filtragem de tarefas
 const pendingTasksCount = computed(
   () => todos.value.filter((todo) => !todo.done).length
-);
+); // Contagem de tarefas pendentes usando uma variável computada
 
-const todos = ref([]);
-const filteredTodos = ref([]);
+const todos = ref([]); // Lista de todas as tarefas
+const filteredTodos = ref([]); // Lista de tarefas filtradas exibidas
 
+// Observa mudanças na lista de todas as tarefas para salvar no localStorage
 watch(
   todos,
   (newVal) => {
@@ -114,6 +116,7 @@ watch(
   { deep: true }
 );
 
+// Ordena as tarefas por prioridade e data de criação ascendente
 const todos_asc = computed(() =>
   todos.value.slice().sort((a, b) => {
     const priorityOrder = {
@@ -133,68 +136,78 @@ const todos_asc = computed(() =>
   })
 );
 
+// Manipuladores de eventos e funções relacionadas às tarefas
 const handleOpenDeleteModal = (index) => {
-  showOptions.value = {};
-  taskIdToRemove.value = index;
-  showRemoveTask.value = true;
+  showOptions.value = {}; // Limpa o estado das opções de exibição
+  taskIdToRemove.value = index; // Define o ID da tarefa a ser removida
+  showRemoveTask.value = true; // Exibe o modal de remoção de tarefa
 };
 
+// Recarrega a lista de tarefas do localStorage e atualiza as tarefas filtradas
 const reloadTodos = () => {
-  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
-  updateFilteredTodos();
+  todos.value = JSON.parse(localStorage.getItem("todos")) || []; // Carrega as tarefas do localStorage
+  updateFilteredTodos(); // Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
 };
 
+// Alternar a exibição das opções de cada tarefa
 const toggleOptions = (index) => {
   showOptions.value = {
     [index]: !showOptions.value[index],
   };
 };
 
+// Exclui uma tarefa com base no ID e atualiza a lista de tarefas
 const deleteTask = (taskId) => {
-  showOptions.value = {};
+  showOptions.value = {}; // Limpa o estado das opções de exibição
   todos.value = todos.value.filter(
     (_, index) => index !== taskIdToRemove.value
-  );
-  showRemoveTask.value = false;
-  updateFilteredTodos();
+  ); // Filtra e atualiza a lista de tarefas removendo a tarefa com o ID especificado
+  showRemoveTask.value = false; // Fecha o modal de remoção de tarefa
+  updateFilteredTodos(); // Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
 };
 
+// Define a categoria selecionada e atualiza as tarefas filtradas
 const setCategory = (category) => {
-  selectedCategory.value = category;
-  updateFilteredTodos();
+  selectedCategory.value = category; // Define a categoria selecionada
+  updateFilteredTodos(); // Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
 };
 
+// Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
 const updateFilteredTodos = () => {
-  let todosToFilter = todos_asc.value;
+  let todosToFilter = todos_asc.value; // Inicia com todas as tarefas ordenadas por prioridade e data
 
+  // Filtra as tarefas com base na categoria selecionada
   if (selectedCategory.value !== "all") {
     todosToFilter = todosToFilter.filter((todo) => {
       if (selectedCategory.value === "finished") {
-        return todo.done;
+        return todo.done; // Retorna tarefas finalizadas se a categoria for "finished"
       } else if (selectedCategory.value === "others") {
-        return todo.category === null;
+        return todo.category === null; // Retorna tarefas sem categoria se a categoria for "others"
       }
-      return todo.category === selectedCategory.value;
+      return todo.category === selectedCategory.value; // Retorna tarefas da categoria selecionada
     });
   }
 
+  // Filtra as tarefas com base na consulta de pesquisa por título ou descrição
   if (!searchQuery.value.trim()) {
-    filteredTodos.value = todosToFilter;
+    filteredTodos.value = todosToFilter; // Exibe todas as tarefas se não houver consulta de pesquisa
   } else {
     const search = searchQuery.value.trim().toLowerCase();
     filteredTodos.value = todosToFilter.filter(
       (todo) =>
         todo.content.title.toLowerCase().includes(search) ||
         todo.content.description.toLowerCase().includes(search)
-    );
+    ); // Filtra tarefas com base na consulta de pesquisa por título ou descrição
   }
 };
 
+// Observa mudanças na consulta de pesquisa para atualizar as tarefas filtradas
 watch(searchQuery, updateFilteredTodos);
 
+// Carrega as tarefas do localStorage e atualiza as tarefas filtradas ao montar o componente
 onMounted(() => {
-  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
-  updateFilteredTodos();
+  todos.value = JSON.parse(localStorage.getItem("todos")) || []; // Carrega as tarefas do localStorage
+  updateFilteredTodos(); // Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
 });
 </script>
 
@@ -214,6 +227,7 @@ onMounted(() => {
   background-color: #1ad18f
   border: none
   border-radius: 50%
+  cursor: pointer
 
 .icon_plus
   width: 25px

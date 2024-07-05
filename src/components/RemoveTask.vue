@@ -19,17 +19,22 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onMounted } from "vue";
+import { getCurrentInstance } from "vue";
 
+// Obtém a instância atual do componente Vue
 const instance = getCurrentInstance();
 
+// Função para cancelar a ação de exclusão
 const cancelDelete = () => {
+  // Emite um evento "close" para notificar o fechamento do modal ou diálogo
   if (instance) {
     instance.emit("close");
   }
 };
 
+// Função para confirmar a exclusão
 const confirmDelete = () => {
+  // Emite um evento "delete" para confirmar a ação de exclusão
   if (instance) {
     instance.emit("delete");
   }

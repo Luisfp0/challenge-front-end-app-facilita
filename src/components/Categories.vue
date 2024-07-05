@@ -58,16 +58,20 @@
 </template>
 
 <script setup>
-import { defineProps, onMounted, ref, computed, getCurrentInstance } from "vue";
+import { defineProps, ref, computed, getCurrentInstance } from "vue";
 
+// Definição das propriedades recebidas pelo componente
 const props = defineProps({
   todos: Array,
 });
 
+// Instância atual do componente
 const instance = getCurrentInstance();
 
+// Variável reativa para armazenar a categoria selecionada
 const selectedCategory = ref("all");
 
+// Funções para filtrar por cada categoria e emitir eventos
 const allFilter = () => {
   selectedCategory.value = "all";
   if (instance) {
@@ -103,15 +107,15 @@ const finishedFilter = () => {
   }
 };
 
+// Computadas para contar o número de tarefas urgentes e importantes não finalizadas
 const urgentCount = computed(() => {
-  return props.todos.filter(
-    (todo) => todo.category === "urgent" && todo.done === false
-  ).length;
+  return props.todos.filter((todo) => todo.category === "urgent" && !todo.done)
+    .length;
 });
 
 const importantCount = computed(() => {
   return props.todos.filter(
-    (todo) => todo.category === "important" && todo.done === false
+    (todo) => todo.category === "important" && !todo.done
   ).length;
 });
 </script>
