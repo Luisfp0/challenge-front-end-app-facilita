@@ -2,8 +2,8 @@
   <div class="container_form">
     <div class="task_container">
       <fa class="icon_close" :icon="['fas', 'xmark']" @click="closeForm" />
-      <h3>Cadastrar Tarefa</h3>
-      <form @submit.prevent="addTodo">
+      <h3>Editar tarefa</h3>
+      <form @submit.prevent="editTodo">
         <div>
           <h4>Título:</h4>
           <input class="input_text" type="text" v-model="input_title" />
@@ -36,7 +36,7 @@
               <div>Importante</div>
             </label>
           </div>
-          <input class="submit" type="submit" value="Adicionar" />
+          <input class="submit" type="submit" value="Editar" />
         </div>
       </form>
     </div>
@@ -44,24 +44,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref, getCurrentInstance, onMounted } from "vue";
-import { v4 as uuidv4 } from "uuid";
+import { defineProps, ref, getCurrentInstance, onMounted } from "vue";
+
+// Definição das propriedades recebidas pelo componente
+const props = defineProps({
+  todoIdToEdit: String,
+});
 
 // Variáveis reativas para os campos do formulário e para a lista de tarefas
 const input_title = ref("");
 const input_description = ref("");
-const todos = ref([]);
-let input_category = ref<string | null>(null); // Variável para armazenar a categoria selecionada
+const input_category = ref<string | null>(null); // Variável para armazenar a categoria selecionada
+const todos = ref([]); // Lista de tarefas
 const instance = getCurrentInstance();
 
 // Função executada quando o componente é montado para carregar tarefas salvas no localStorage
 onMounted(() => {
   const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
   todos.value = storedTodos;
+
+  // Encontra a tarefa com o ID específico em storedTodos
+  const todoToEdit = storedTodos.find((todo) => todo.id === props.todoIdToEdit);
+
+  // Se encontrar a tarefa, preenche os campos do formulário com suas informações
+  if (todoToEdit) {
+    input_title.value = todoToEdit.content.title;
+    input_description.value = todoToEdit.content.description;
+    input_category.value = todoToEdit.category;
+  }
 });
 
-// Função para adicionar uma nova tarefa à lista
-const addTodo = () => {
+// Função para editar a tarefa existente
+const editTodo = () => {
   // Verifica se os campos obrigatórios estão preenchidos
   if (
     input_title.value.trim() === "" ||
@@ -71,34 +85,23 @@ const addTodo = () => {
     return;
   }
 
-  // Cria um novo objeto de tarefa com UUID e o adiciona à lista
-  const newTodo = {
-    id: uuidv4(), // Gera um UUID único
-    content: {
-      title: input_title.value,
-      description: input_description.value,
-    },
-    category: input_category.value,
-    done: false,
-    createdAt: new Date().getTime(),
-  };
+  // Encontra a tarefa a ser editada na lista de tarefas pelo ID
+  const todoToEdit = todos.value.find((todo) => todo.id === props.todoIdToEdit);
 
-  todos.value.push(newTodo);
-
-  // Limpa os campos do formulário após adicionar a tarefa
-  input_title.value = "";
-  input_description.value = "";
-  input_category.value = null;
+  // Atualiza os dados da tarefa com os novos valores
+  todoToEdit.content.title = input_title.value;
+  todoToEdit.content.description = input_description.value;
+  todoToEdit.category = input_category.value;
 
   // Salva a lista atualizada no localStorage
   saveTodos();
 
-  // Emite um evento para notificar a adição de uma nova tarefa
+  // Emite um evento para notificar a edição de uma tarefa
   if (instance) {
-    instance.emit("newTodo");
+    instance.emit("editForm");
   }
 
-  // Fecha o formulário após adicionar a tarefa
+  // Fecha o formulário após editar a tarefa
   closeForm();
 };
 
@@ -107,7 +110,7 @@ const saveTodos = () => {
   localStorage.setItem("todos", JSON.stringify(todos.value));
 };
 
-// Função para fechar o formulário de cadastro de tarefas
+// Função para fechar o formulário de edição de tarefas
 const closeForm = () => {
   // Emite um evento para notificar o fechamento do formulário
   if (instance) {

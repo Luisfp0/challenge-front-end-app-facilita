@@ -13,6 +13,9 @@
   <div v-if="showRemoveTask">
     <RemoveTask @close="showRemoveTask = false" @delete="deleteTask" />
   </div>
+  <div v-if="showEditTask">
+    <EditTask :todoIdToEdit="taskIdToEdit" @close="showEditTask = false" @editForm="reloadTodos" />
+  </div>
   <div class="todo_list_container">
     <button class="add_todo" @click="showRegisterForm = true">
       <fa class="icon_plus" :icon="['fas', 'plus']" />
@@ -72,11 +75,11 @@
               >
                 <div>
                   <div class="edit_circle"></div>
-                  <button>Editar</button>
+                  <button @click="handleOpenEditModal(todo.id)">Editar</button>
                 </div>
                 <div>
                   <div class="remove_circle"></div>
-                  <button @click="handleOpenDeleteModal(index)">Excluir</button>
+                  <button @click="handleOpenDeleteModal(todo.id)">Excluir</button>
                 </div>
               </div>
             </div>
@@ -91,13 +94,16 @@
 import RegisterTaskVue from "../components/RegisterTask.vue"; // Importa o componente de registro de tarefa
 import Categories from "../components/Categories.vue"; // Importa o componente de categorias
 import RemoveTask from "../components/RemoveTask.vue"; // Importa o componente de remoção de tarefa
+import EditTask from "../components/EditTask.vue"; // Importa o componente de edição de tarefa
 import { computed, onMounted, ref, watch } from "vue"; // Importa funções e hooks necessários do Vue
 
 // Referências reativas e variáveis computadas
 const showRegisterForm = ref(false); // Controla a exibição do formulário de registro de tarefa
 const showRemoveTask = ref(false); // Controla a exibição do modal de remoção de tarefa
+const showEditTask = ref(false); // Controla a exibição do modal de edição de tarefa
 const showOptions = ref({}); // Armazena o estado de exibição das opções de cada tarefa
 const taskIdToRemove = ref(null); // Armazena o ID da tarefa a ser removida
+const taskIdToEdit = ref(null); // Armazena o ID da tarefa a ser editada
 const searchQuery = ref(""); // Consulta de pesquisa para filtragem de tarefas por título e descrição
 const selectedCategory = ref("all"); // Categoria selecionada para filtragem de tarefas
 const pendingTasksCount = computed(
@@ -143,6 +149,12 @@ const handleOpenDeleteModal = (index) => {
   showRemoveTask.value = true; // Exibe o modal de remoção de tarefa
 };
 
+const handleOpenEditModal = (index) => {
+  showOptions.value = {}; // Limpa o estado das opções de exibição
+  taskIdToEdit.value = index; // Define o ID da tarefa a ser editada
+  showEditTask.value = true; // Exibe o modal de edição de tarefa
+};
+
 // Recarrega a lista de tarefas do localStorage e atualiza as tarefas filtradas
 const reloadTodos = () => {
   todos.value = JSON.parse(localStorage.getItem("todos")) || []; // Carrega as tarefas do localStorage
@@ -157,13 +169,11 @@ const toggleOptions = (index) => {
 };
 
 // Exclui uma tarefa com base no ID e atualiza a lista de tarefas
-const deleteTask = (taskId) => {
-  showOptions.value = {}; // Limpa o estado das opções de exibição
-  todos.value = todos.value.filter(
-    (_, index) => index !== taskIdToRemove.value
-  ); // Filtra e atualiza a lista de tarefas removendo a tarefa com o ID especificado
-  showRemoveTask.value = false; // Fecha o modal de remoção de tarefa
-  updateFilteredTodos(); // Atualiza as tarefas filtradas com base na categoria e na consulta de pesquisa
+const deleteTask = () => {
+  showOptions.value = {};
+  todos.value = todos.value.filter((todo) => todo.id !== taskIdToRemove.value);
+  showRemoveTask.value = false;
+  updateFilteredTodos();
 };
 
 // Define a categoria selecionada e atualiza as tarefas filtradas
