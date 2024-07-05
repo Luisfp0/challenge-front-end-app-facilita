@@ -165,7 +165,6 @@ const setCategory = (category) => {
 };
 
 const updateFilteredTodos = () => {
-  console.log(selectedCategory.value);
   let todosToFilter = todos_asc.value;
 
   if (selectedCategory.value !== "all") {
@@ -183,8 +182,10 @@ const updateFilteredTodos = () => {
     filteredTodos.value = todosToFilter;
   } else {
     const search = searchQuery.value.trim().toLowerCase();
-    filteredTodos.value = todosToFilter.filter((todo) =>
-      todo.content.title.toLowerCase().includes(search)
+    filteredTodos.value = todosToFilter.filter(
+      (todo) =>
+        todo.content.title.toLowerCase().includes(search) ||
+        todo.content.description.toLowerCase().includes(search)
     );
   }
 };
