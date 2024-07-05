@@ -1,4 +1,11 @@
 <template>
+  <Categories
+    @all="() => setCategory('all')"
+    @urgent="() => setCategory('urgent')"
+    @important="() => setCategory('important')"
+    @others="() => setCategory('others')"
+    @finished="() => setCategory('finished')"
+  />
   <div v-if="showRegisterForm">
     <RegisterTaskVue @close="showRegisterForm = false" @newTodo="reloadTodos" />
   </div>
@@ -81,6 +88,7 @@
 
 <script setup>
 import RegisterTaskVue from "../components/RegisterTask.vue";
+import Categories from "../components/Categories.vue";
 import RemoveTask from "../components/RemoveTask.vue";
 import { computed, onMounted, ref, watch } from "vue";
 
@@ -89,8 +97,10 @@ const showRemoveTask = ref(false);
 const showOptions = ref({});
 const taskIdToRemove = ref(null);
 const searchQuery = ref("");
+const selectedCategory = ref("all");
 
 const todos = ref([]);
+const filteredTodos = ref([]);
 
 watch(
   todos,
@@ -114,6 +124,7 @@ const handleOpenDeleteModal = (index) => {
 
 const reloadTodos = () => {
   todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+  updateFilteredTodos();
 };
 
 const toggleOptions = (index) => {
@@ -128,21 +139,53 @@ const deleteTask = (taskId) => {
     (_, index) => index !== taskIdToRemove.value
   );
   showRemoveTask.value = false;
+  updateFilteredTodos();
 };
 
-const filteredTodos = computed(() => {
+const filterByCategory = (category) => {
+  if (category === "all") {
+    filteredTodos.value = todos_asc.value;
+  } else if (category === "finished") {
+    filteredTodos.value = todos_asc.value.filter((todo) => todo.done);
+  } else {
+    filteredTodos.value = todos_asc.value.filter(
+      (todo) => todo.category === category
+    );
+  }
+};
+
+const setCategory = (category) => {
+  selectedCategory.value = category;
+  updateFilteredTodos();
+};
+
+const updateFilteredTodos = () => {
+  let todosToFilter = todos_asc.value;
+
+  if (selectedCategory.value !== "all") {
+    todosToFilter = todosToFilter.filter((todo) => {
+      if (selectedCategory.value === "finished") {
+        return todo.done;
+      }
+      return todo.category === selectedCategory.value;
+    });
+  }
+
   if (!searchQuery.value.trim()) {
-    return todos_asc.value;
+    filteredTodos.value = todosToFilter;
   } else {
     const search = searchQuery.value.trim().toLowerCase();
-    return todos_asc.value.filter((todo) =>
+    filteredTodos.value = todosToFilter.filter((todo) =>
       todo.content.title.toLowerCase().includes(search)
     );
   }
-});
+};
+
+watch(searchQuery, updateFilteredTodos);
 
 onMounted(() => {
   todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+  updateFilteredTodos();
 });
 </script>
 

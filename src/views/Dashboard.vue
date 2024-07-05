@@ -4,7 +4,6 @@
     <div class="main_content">
       <Header />
       <div class="container_todo">
-        <Categories />
         <TodoList />
       </div>
     </div>
