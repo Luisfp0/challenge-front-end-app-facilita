@@ -37,50 +37,44 @@ const selectOption = (option: string) => {
 };
 </script>
 
-<style scoped>
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #2693ff;
-  border-right: 1px solid #ccc;
-  padding: 10px 0 10px 0;
-  width: 8%;
-}
+<style lang="stylus" scoped>
+.sidebar
+  display: flex
+  flex-direction: column
+  align-items: center
+  background-color: #2693ff
+  border-right: 1px solid #ccc
+  padding: 10px 0
+  width: 8%
 
-.logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 15%;
-}
+.logo
+  width: 60px
+  height: 60px
+  border-radius: 15%
 
-.container_options {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
+.container_options
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: 100%
+  width: 100%
 
-.option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  text-align: center;
-  cursor: pointer;
-  box-sizing: border-box;
-  padding: 15px;
-  font-size: 14px;
-}
+.option
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 10px
+  color: white
+  text-align: center
+  cursor: pointer
+  box-sizing: border-box
+  padding: 15px
+  font-size: 14px
 
-.icon {
-  width: 23px;
-  height: 23px;
-}
+.icon
+  width: 23px
+  height: 23px
 
-.selected {
-  background-color: #0d47a1;
-}
+.selected
+  background-color: #0d47a1
 </style>

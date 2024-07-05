@@ -98,107 +98,93 @@ const closeForm = () => {
 };
 </script>
 
-<style scoped>
-.container_form {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.315);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<style lang="stylus" scoped>
+.container_form
+  position: absolute
+  z-index: 1
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.315)
+  display: flex
+  justify-content: center
+  align-items: center
 
-.task_container {
-  position: relative;
-  width: 450px;
-  background-color: #ffffff;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-}
+.task_container
+  position: relative
+  width: 450px
+  background-color: #ffffff
+  padding: 30px
+  border: 1px solid #ccc
+  border-radius: 5px
+  margin-top: 10px
+  display: flex
+  flex-direction: column
 
-.task_container h3 {
-  font-size: 23px;
-  margin-bottom: 30px;
-}
+.task_container h3
+  font-size: 23px
+  margin-bottom: 30px
 
-.icon_close {
-  position: absolute;
-  right: 25px;
-  top: 25px;
-  cursor: pointer;
-}
+.icon_close
+  position: absolute
+  right: 25px
+  top: 25px
+  cursor: pointer
 
-.task_container h4 {
-  font-size: 15px;
-  margin-bottom: 4px;
-}
+.task_container h4
+  font-size: 15px
+  margin-bottom: 4px
 
-.task_container form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  height: 100%;
-}
+.task_container form
+  display: flex
+  flex-direction: column
+  gap: 15px
+  height: 100%
 
 .input_text,
-.input_textarea {
-  width: 100%;
-  font-size: 17px;
-  border: 2px solid rgba(0, 0, 0, 0.363);
-  border-radius: 5px;
-  padding: 10px;
-  box-sizing: border-box;
-}
+.input_textarea
+  width: 100%
+  font-size: 17px
+  border: 2px solid rgba(0, 0, 0, 0.363)
+  border-radius: 5px
+  padding: 10px
+  box-sizing: border-box
 
-.input_textarea {
-  height: 200px;
-}
+.input_textarea
+  height: 200px
 
 .input_text:focus,
-.input_textarea:focus {
-  border-color: #2693ff;
-  outline: none;
-}
+.input_textarea:focus
+  border-color: #2693ff
+  outline: none
 
-.add {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+.add
+  display: flex
+  justify-content: space-between
+  align-items: center
 
-.options {
-  display: flex;
-  gap: 10px;
-}
+.options
+  display: flex
+  gap: 10px
 
-.options label {
-  display: flex;
-  align-items: center;
-}
+.options label
+  display: flex
+  align-items: center
 
-.options input {
-  margin-right: 5px;
-  width: 20px;
-  height: 20px;
-}
+.options input
+  margin-right: 5px
+  width: 20px
+  height: 20px
 
-.submit {
-  color: white;
-  font-size: 15px;
-  width: 100px;
-  height: 40px;
-  border: none;
-  border-radius: 7px;
-  background: #1ad18f;
-  cursor: pointer;
-}
+.submit
+  color: white
+  font-size: 15px
+  width: 100px
+  height: 40px
+  border: none
+  border-radius: 7px
+  background: #1ad18f
+  cursor: pointer
 </style>

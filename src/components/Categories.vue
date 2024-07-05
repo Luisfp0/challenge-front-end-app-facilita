@@ -21,42 +21,35 @@
   </div>
 </template>
 
-<style scoped>
-.categories {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  background-color: #F4FBFF;
-  border-left: 1px solid #ccc;
-  width: 20%;
-}
+<style lang="stylus" scoped>
+.categories
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: 100%
+  background-color: #F4FBFF
+  border-left: 1px solid #ccc
+  width: 20%
 
-.category-option {
-  color: #000;
-  margin: 5px 0;
-  cursor: pointer;
-}
+.category-option
+  color: #000
+  margin: 5px 0
+  cursor: pointer
+  &:hover
+    color: #007bff
+    text-decoration: underline
 
-.category-option:hover {
-  color: #007bff;
-  text-decoration: underline;
-}
+.icon
+  width: 14px
+  height: 14px
+  margin-right: 5px
 
-.icon {
-  width: 14px;
-  height: 14px;
-  margin-right: 5px;
-}
+h2
+  margin-bottom: 30px
 
-h2 {
-  margin-bottom: 30px;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+.options
+  display: flex
+  flex-direction: column
+  gap: 10px
 </style>
