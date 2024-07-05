@@ -1,6 +1,6 @@
 # 🚀 Teste Front-end - App Facilita
 
-## Overview
+<h2> :writing_hand:Descrição</h1>
 
 Este README fornece uma visão geral do aplicativo Todo desenvolvido com Vue.js, destacando suas funcionalidades e aspectos técnicos.
 
@@ -32,12 +32,11 @@ O projeto está hospedado na vercel, caso tenha interesse em visualizar, é só 
   - Tarefas podem ser editadas ou excluídas através das opções exibidas em cada tarefa.
   - Suporta filtragem de tarefas por categoria (todas, urgentes, importantes, outras, concluídas) e pesquisa por consulta.
 
-## Detalhes Técnicos
+<h2>🛠️ Construído com</h2>
 
 - **Frameworks e Bibliotecas**
 
   - Desenvolvido usando Vue.js com API de composição.
-  - Utiliza Vuex para gerenciamento de estado.
   - Estilização feita com Stylus para pré-processamento CSS.
 
 - **Componentes**
