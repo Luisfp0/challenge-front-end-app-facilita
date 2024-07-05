@@ -51,7 +51,7 @@ import { v4 as uuidv4 } from "uuid";
 const input_title = ref("");
 const input_description = ref("");
 const todos = ref([]);
-let input_category = ref<string | null>(null); // Variável para armazenar a categoria selecionada
+const input_category = ref<string | null>(null); // Variável para armazenar a categoria selecionada
 const instance = getCurrentInstance();
 
 // Função executada quando o componente é montado para carregar tarefas salvas no localStorage
@@ -70,7 +70,7 @@ const addTodo = () => {
     alert("Titulo e descrição obrigatórios.");
     return;
   }
-
+  console.log(input_category)
   // Cria um novo objeto de tarefa com UUID e o adiciona à lista
   const newTodo = {
     id: uuidv4(), // Gera um UUID único

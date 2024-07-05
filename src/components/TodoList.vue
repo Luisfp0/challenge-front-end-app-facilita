@@ -59,7 +59,7 @@
           </div>
           <div class="options_container">
             <span class="tag" :class="todo.category">
-              {{ todo.category === "important" ? "Importante" : "Urgente" }}
+              {{ todo.category === "important" ? "Importante" : todo.category === "urgent" ? "Urgente" : "" }}
             </span>
             <fa
               @click="toggleOptions(index)"
