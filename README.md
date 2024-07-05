@@ -4,9 +4,6 @@
 
 Este README fornece uma visão geral do aplicativo Todo desenvolvido com Vue.js, destacando suas funcionalidades e aspectos técnicos.
 
-O desafio proposto pode ser visualizado no seguinte link: 
-<a>https://bitbucket.org/heliocesar01/teste-front-end-n.2/src/master/</a>
-
 O projeto está hospedado na vercel, caso tenha interesse em visualizar, é só acessar esse link.
 <a>https://challenge-front-end-app-facilita.vercel.app/</a>
 
